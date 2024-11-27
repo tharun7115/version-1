@@ -1,16 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose'); // Fixed typo
-const userRoutes = require('./routes/usersRoutes');
+const mongoose = require('mongoose');
+const userRoutes = require('./routes/usersRoutes'); // User routes
+const quickScanRoutes = require('./routes/quickScanRoutes'); // QuickScan routes
+
 const app = express();
 const port = 3000;
 
 // Middleware
 app.use(bodyParser.json());
-app.use('/users', userRoutes); // Route prefix
+
+// Route Prefixes
+app.use('/users', userRoutes); 
+app.use('/quickScan', quickScanRoutes);
+
 
 // Database connection
-mongoose.connect('mongodb://localhost:27017/users', {
+mongoose.connect('mongodb://localhost:27017/users', { 
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
